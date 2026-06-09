@@ -64,7 +64,7 @@ User question
 | Layer | Choice |
 |---|---|
 | Agent framework | [LangGraph](https://langchain-ai.github.io/langgraph/) |
-| LLM provider | Any model via [OpenRouter](https://openrouter.ai) (OpenAI-compatible API) |
+| LLM provider | Qwen via Alibaba Cloud Model Studio / DashScope (OpenAI-compatible API) |
 | A2A transport | [a2a-sdk](https://pypi.org/project/a2a-sdk/) |
 | Registry | FastAPI + in-memory store |
 | Package manager | [uv](https://docs.astral.sh/uv/) |
@@ -107,7 +107,7 @@ Tổng kết & Q&A (15 phút)
 
 - Python 3.11+
 - [uv](https://docs.astral.sh/uv/) package manager
-- An [OpenRouter](https://openrouter.ai) API key
+- An Alibaba Cloud Model Studio / DashScope API key
 
 ### Setup
 
@@ -119,7 +119,7 @@ uv sync
 
 # Configure environment
 cp .env.example .env
-# Edit .env with your OpenRouter API key
+# Edit .env with your Alibaba Cloud Model Studio API key
 ```
 
 ### Run the Full System (Stage 5)
@@ -167,7 +167,7 @@ legal_multiagent/
 ├── .env.example               # Required environment variables
 │
 ├── common/                    # Shared utilities
-│   ├── llm.py                 # get_llm() → ChatOpenAI via OpenRouter
+│   ├── llm.py                 # get_llm() → ChatOpenAI via DashScope
 │   ├── a2a_client.py          # delegate() — A2A message sending
 │   └── registry_client.py     # discover() / register() — Registry API
 │
@@ -195,11 +195,12 @@ Each agent module follows the same structure:
 
 | Environment Variable | Description | Default |
 |---|---|---|
-| `OPENROUTER_API_KEY` | Your OpenRouter API key | (required) |
-| `OPENROUTER_MODEL` | Model identifier | `anthropic/claude-sonnet-4-5` |
+| `DASHSCOPE_API_KEY` | Your Alibaba Cloud Model Studio API key | (required) |
+| `DASHSCOPE_MODEL` | Model identifier | `qwen3-vl-plus-2025-09-23` |
+| `DASHSCOPE_BASE_URL` | DashScope OpenAI-compatible base URL | `https://dashscope-intl.aliyuncs.com/compatible-mode/v1` |
 | `REGISTRY_URL` | Registry service URL | `http://localhost:10000` |
 
-The model is swappable to any OpenRouter-supported model (e.g., `openai/gpt-4o`, `google/gemini-2.0-flash`).
+If your API key was created in China (Beijing), set `DASHSCOPE_BASE_URL` to `https://dashscope.aliyuncs.com/compatible-mode/v1`. For US (Virginia), use `https://dashscope-us.aliyuncs.com/compatible-mode/v1`.
 
 ## Documentation Diagrams
 

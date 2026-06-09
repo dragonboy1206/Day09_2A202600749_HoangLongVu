@@ -294,7 +294,7 @@ def create_graph():
     return graph.compile()
 
 
-QUESTION = "If a company breaks a contract and avoids taxes, what are the legal and regulatory consequences?"
+QUESTION = "Nếu một công ty vi phạm hợp đồng và trốn thuế thì hậu quả pháp lý và quy định là gì?"
 
 
 async def main():

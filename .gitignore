@@ -3,3 +3,5 @@
 **cache**
 .claude
 **SOLUTION**
+stage_visualizer/runs/
+stage_visualizer/*.log

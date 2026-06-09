@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stage Flow Visualizer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Danh sách stage">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <div>
+            <h1>Stage Flows</h1>
+            <p>Tools, agents, routing</p>
+          </div>
+        </div>
+
+        <nav class="stage-nav" id="stageNav"></nav>
+
+        <section class="meta-panel">
+          <h2>Đường dẫn code</h2>
+          <p id="sourcePath"></p>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="stageKind"></p>
+            <h2 id="stageTitle"></h2>
+          </div>
+          <div class="toolbar" aria-label="Điều khiển mô phỏng">
+            <button class="icon-button" id="prevStep" type="button" title="Bước trước" aria-label="Bước trước">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button class="primary-action" id="playFlow" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Chạy luồng
+            </button>
+            <button class="icon-button" id="nextStep" type="button" title="Bước tiếp" aria-label="Bước tiếp">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+            <button class="run-action" id="runActual" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h16v16H4z" />
+                <path d="M9 8l6 4-6 4z" />
+              </svg>
+              Chạy thật
+            </button>
+          </div>
+        </header>
+
+        <section class="question-band">
+          <span>Câu hỏi mẫu</span>
+          <p id="questionText"></p>
+        </section>
+
+        <section class="config-panel">
+          <div class="field-block">
+            <label for="questionInput">Câu hỏi chạy thật</label>
+            <textarea id="questionInput" rows="3"></textarea>
+          </div>
+          <div class="field-block">
+            <label for="promptInput">System prompt</label>
+            <textarea id="promptInput" rows="5"></textarea>
+          </div>
+          <div class="tool-picker">
+            <div class="panel-heading">
+              <h3>Tool có thể dùng</h3>
+              <span id="selectedToolCount"></span>
+            </div>
+            <div class="tool-checks" id="toolChecks"></div>
+          </div>
+        </section>
+
+        <section class="flow-layout">
+          <div class="flow-canvas" aria-label="Sơ đồ luồng stage">
+            <svg id="flowSvg" role="img"></svg>
+          </div>
+
+          <section class="timeline-panel">
+            <div class="panel-heading">
+              <h3>Timeline</h3>
+              <span id="stepCounter"></span>
+            </div>
+            <ol class="timeline" id="timeline"></ol>
+          </section>
+        </section>
+
+        <section class="run-grid">
+          <section class="run-panel">
+            <div class="panel-heading">
+              <h3>Live run log</h3>
+              <span id="runStatus">Chưa chạy</span>
+            </div>
+            <pre class="terminal-log" id="liveLog"></pre>
+          </section>
+
+          <section class="result-panel">
+            <div class="panel-heading">
+              <h3>Kết quả thực tế</h3>
+              <span id="logPath"></span>
+            </div>
+            <div class="data-packet" id="currentPacket">
+              <span>Data packet</span>
+              <strong>Chưa có dữ liệu chạy thật</strong>
+              <p>Bấm Chạy thật để xem dữ liệu đi qua từng node.</p>
+            </div>
+            <ol class="event-feed" id="eventFeed"></ol>
+            <div class="actual-result" id="actualResult">Kết quả cuối sẽ hiện ở đây sau khi chạy stage.</div>
+          </section>
+        </section>
+
+        <section class="detail-grid">
+          <section>
+            <div class="panel-heading">
+              <h3>Tools</h3>
+              <span id="toolCount"></span>
+            </div>
+            <div class="item-grid" id="toolGrid"></div>
+          </section>
+
+          <section>
+            <div class="panel-heading">
+              <h3>Agents / Nodes</h3>
+              <span id="agentCount"></span>
+            </div>
+            <div class="item-grid" id="agentGrid"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
